@@ -1,2 +1,2 @@
-name=name.upper()
-print(f'\"HELLO {name}\" that is a very nice name with {len(name)} letters.')
+name=input("Please enter your name.  ")
+print(f'\"HELLO {name.upper()}\" that is a very nice name with {len(name)} letters.')
