@@ -21,13 +21,13 @@ def menu_print():
 
 def add_entry():
         name=input("What is the new name? ")
-        name.trim().lower()
+        name.strip().lower()
         num=input("What is the phone number? ")
         phonebook[name]=num
 
 def list_entries():
     name=input("Who are you looking for? ")
-    name.trim().lower()
+    name.strip().lower()
     num=phonebook.get(name,"Name not found")
     print(num)
 
@@ -36,7 +36,7 @@ def del_entry():
     for n in names:
         print(n)
     name=input("Delete who? ")
-    name.trim().lower()
+    name.strip().lower()
     if(phonebook.get(name).lower() != None):
         del phonebook[name]
     else:
