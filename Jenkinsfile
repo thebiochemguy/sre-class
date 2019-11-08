@@ -3,10 +3,10 @@ pipeline {
    stages {
        stage('Deploy') {
            steps {
-               timeout(time: 1, unit: 'MINUTES') {
+               timeout(time: 3, unit: 'MINUTES') {
                    sh 'jenkins/fib 5'
                }
-               timeout(time: 1, unit: 'MINUTES') {
+               timeout(time: 3, unit: 'MINUTES') {
                    sh 'jenkins/fib 32'
                }
            }
