@@ -19,7 +19,7 @@ def got_url_name():
         data.append(results)
 
         
-    with open(charfileName, 'a',encoding='utf-8') as f:
+    with open(charfileName, 'w',encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 def read_file(fileName):
@@ -40,22 +40,16 @@ def got_url_houses():
         data.append(results)
 
         
-    with open(housefileName, 'a',encoding='utf-8') as f:
+    with open(housefileName, 'w',encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-def getHouseIDs(homeurls,houses):
+def getCharHouses(homeurls,houses):
     data=[]
     for home in homeurls:
-        # print(houses[0][0]["url"])
-        # id=int(home.split("/")[-1])
-        # print(f'id={ids[-1]}')
         for house in houses:
             for h in house:
                 if (h["url"] == home):
                     data.append(h["name"])
-                    # print(h["name"])      
-        # print(f'home: {name}')
-        # data.append(ids[-1])
     return data
 
 
@@ -73,5 +67,5 @@ for c in characters:
      for x in c:
         i+=1
         houseList=x["allegiances"]
-        allegences=getHouseIDs(houseList,houses)
+        allegences=getCharHouses(houseList,houses)
         print(f'name:{x["name"]} homes: {allegences}')
