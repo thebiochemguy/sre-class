@@ -8,46 +8,76 @@
 
 import character
 
-dude=character.Hero()
-bad_dude=character.Goblin()
+main_menu = [   
+    "Fight Goblin",
+    "Fight Zombie",
+    "do nothing",
+    "Print hero status",
+    "Print goblin status",
+    "Print zombie status",
+    "flee",
+]
+
+def get_user_choice(choice_list):
+    choice = -1
+    choice_string = choices_to_string(choice_list)
+    while choice == -1:
+        try:
+            choice = int(input(choice_string))
+            if choice <= 0 or choice > len(choice_list):
+                raise ValueError
+        except ValueError:
+            print_menu_error()
+    return choice
+
+def choices_to_string(choice_list):
+    choice_string = ""
+    num=1
+    for choice in choice_list:
+        choice_string += "%d: %s\n" % (num, choice)
+        num+=1
+    choice_string += "Please choose an option: "
+    return choice_string
+
+def print_menu_error():
+    print("That was not a vaild choice. Try again.\n\n\n")
+
+def badDude_turn():
+    if bad_dude.alive():
+        bad_dude.attack(dude)
+    if bad_dude2.alive():
+        bad_dude2.attack(dude)
+
+dude=character.Hero("Hero")
+bad_dude=character.Goblin("Goblin")
+bad_dude2=character.Zombie("Zombie")
 
 def main():
-#    hero_health = dude.health
-#    hero_power = dude.power
-#    goblin_health = bad_dude.health
-#    goblin_power = bad_dude.power
 
-
-    while bad_dude.health > 0 and dude.health > 0:
-        print("You have {} health and {} power.".format(dude.health, dude.power))
-        print("The goblin has {} health and {} power.".format(bad_dude.health, bad_dude.power))
-        print()
-        print("What do you want to do?")
-        print("1. fight goblin")
-        print("2. do nothing")
-        print("3. flee")
-        print("> ", end=' ')
-        raw_input = input()
-        if raw_input == "1":
-            # Hero attacks goblin
-            bad_dude.health -= dude.power
-            print("You do {} damage to the goblin.".format(dude.power))
-            if bad_dude.health <= 0:
-                print("The goblin is dead.")
-        elif raw_input == "2":
-            pass
-        elif raw_input == "3":
+    while (bad_dude.alive() or bad_dude2.alive()) and dude.alive():
+        
+        raw_input=get_user_choice(main_menu)
+        if raw_input == 1:
+            dude.attack(bad_dude)
+            badDude_turn()         
+        elif raw_input == 2:
+            dude.attack(bad_dude2)
+            badDude_turn()
+        elif raw_input == 3:
+            badDude_turn()
+        elif raw_input == 4:
+            dude.print_status()
+        elif raw_input == 5:
+            bad_dude.print_status()
+        elif raw_input == 6: 
+            bad_dude2.print_status()
+        elif raw_input == 7:
             print("Goodbye.")
             break
         else:
             print("Invalid input {}".format(raw_input))
-
-        if bad_dude.health > 0:
-            # Goblin attacks hero
-            dude.health -= bad_dude.power
-            print("The goblin does {} damage to you.".format(bad_dude.power))
-            if dude.health <= 0:
-                print("You are dead.")
-
+        
+        if not dude.alive:
+            print("You are dead.")
 
 main()
