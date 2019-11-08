@@ -51,17 +51,32 @@ def getCharHouses(homeurls,houses):
 
     return data
 
+def printCharacterList():
+    for c in characters:
+        houseList=c["allegiances"]
+        allegences=getCharHouses(houseList,houses)
+        print(f'{c["name"]} {allegences}')
 
 
-
-#These are here for when i want to get the data off of the internet again.
-got_url_name()
-got_url_houses()
+def printHouseInfo(name):
+    print(f'looking for {name}')
+    for c in characters:
+        if (c["name"].lower() == name.lower()):
+            houseList=c["allegiances"]
+            for home in houseList:
+                print("\n")
+                id=int(home.split("/")[-1])-1
+                for key in houses[id]:
+                    print(f'{key}: {houses[id][key]}')
+                _=input("\nPress enter to continue")
+            
+   
 
 characters=read_file(charfileName)
 houses=read_file(housefileName)
 
-for c in characters:
-    houseList=c["allegiances"]
-    allegences=getCharHouses(houseList,houses)
-    print(f'name:{c["name"]} homes: {allegences}')
+choice=""
+while choice.lower() != "exit":
+    printCharacterList()
+    choice=input("\nPlease input a character name or \"exit\" to exit: ")
+    printHouseInfo(choice)
