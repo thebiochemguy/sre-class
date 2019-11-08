@@ -55,8 +55,8 @@ def getCharHouses(homeurls,houses):
 
 
 #These are here for when i want to get the data off of the internet again.
-# got_url_name()
-# got_url_houses()
+got_url_name()
+got_url_houses()
 
 characters=read_file(charfileName)
 houses=read_file(housefileName)
