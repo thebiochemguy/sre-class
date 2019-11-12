@@ -8,4 +8,7 @@ Exercises for the SRE Classes.
 
 Introduction to python
 
+API Exercise:
+Currently it reads the json files. However if the 
+
 

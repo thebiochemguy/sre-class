@@ -1,5 +1,6 @@
-import requests
 import json
+import requests
+import sys
 
 
 charfileName="char_got.json"
@@ -22,9 +23,13 @@ def got_url_name():
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 def read_file(fileName):
-    with open(fileName) as f:
-        data=json.load(f)
-        return data
+    try:
+        with open(fileName) as f:
+            data=json.load(f)
+            return data
+    except FileNotFoundError:
+        print("\nLooks like the files dont exist in this directory please run from directory where json files are located.\n")
+        sys.exit()
 
 def got_url_houses():
     last_page=10
@@ -70,8 +75,13 @@ def printHouseInfo(name):
                     print(f'{key}: {houses[id][key]}')
                 _=input("\nPress enter to continue")
             
-   
 
+#Uncomment the two lines below, to get the info off the internet.
+#got_url_name()
+#got_url_houses()
+
+#Reading files to prevent constant api calls... 
+#Make sure you run the program from the same directory where the char_got.json and houses_got.json are located.
 characters=read_file(charfileName)
 houses=read_file(housefileName)
 
